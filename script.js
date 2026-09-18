@@ -1,38 +1,62 @@
-const title = prompt("Как называется ваш проект?");
+"use strict";
+
+let title = prompt("Как называется ваш проект?");
 const screens = prompt("Какие типы экранов нужно разработать?");
 const screenPrice = +prompt("Сколько будет стоить данная работа?");
 const rollback = 20;
-const adaptive = !!prompt("Нужен ли адаптив на сайте?");
-
+const adaptive = confirm("Нужен ли адаптив на сайте?");
 const service1 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice1 = +prompt("Сколько это будет стоить?");
 const service2 = prompt("Какой дополнительный тип услуги нужен?");
 const servicePrice2 = +prompt("Сколько это будет стоить?");
-const fullPrice = screenPrice + servicePrice1 + servicePrice2;
-const servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
 
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
-console.log("Стоимость верстки экранов " + screenPrice + " рублей");
-console.log("Стоимость разработки сайта " + fullPrice + " рублей");
-console.log(screens.toLowerCase().split(", "));
-console.log(
-  "Процент отката посреднику за работу " + fullPrice * (rollback / 100),
-);
-console.log("Итоговая стоимость работы " + servicePercentPrice);
+let fullPrice;
+let allServicePrices;
+let servicePercentPrice;
 
-switch (true) {
-  case fullPrice >= 30000:
-    console.log("Даем скидку в 10%");
-    break;
-  case fullPrice >= 15000 && fullPrice < 30000:
-    console.log("Даем скидку в 5%");
-    break;
-  case fullPrice >= 0 && fullPrice < 15000:
-    console.log("Скидка не предусмотрена");
-    break;
-  case fullPrice < 0:
-    console.log("Что то пошло не так");
-    break;
+const showTypeOf = function (variable) {
+  console.log(variable, typeof variable);
+};
+
+const getRollbackMessage = function (price) {
+  switch (true) {
+    case price >= 30000:
+      return "Даем скидку в 10%";
+    case price >= 15000 && price < 30000:
+      return "Даем скидку в 5%";
+    case price >= 0 && price < 15000:
+      return "Скидка не предусмотрена";
+    case price < 0:
+      return "Что то пошло не так";
+  }
+};
+
+const getAllServicePrices = function (service1, service2) {
+  return service1 + service2;
+};
+
+function getFullPrice(price, servicePrice) {
+  return price + servicePrice;
 }
+
+const getTitle = function (string) {
+  let trimString = string.trim();
+  return trimString[0].toUpperCase() + trimString.slice(1);
+};
+
+const getServicePercentPrices = function (fullPrice, rollback) {
+  return fullPrice - fullPrice * (rollback / 100);
+};
+
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+title = getTitle(title);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+
+showTypeOf(title);
+showTypeOf(fullPrice);
+showTypeOf(adaptive);
+
+console.log(screens.toLowerCase().split(", "));
+console.log(getRollbackMessage(fullPrice));
+console.log("Итоговая стоимость работы " + servicePercentPrice);

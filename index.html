@@ -1,14 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script defer src="./script.js"></script>
+  <title>Управление работниками</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+
 </head>
 
 <body>
+
+  <div class="container">
+    <h1>Управление работниками</h1>
+
+    <form id="employeeForm">
+      <div class="form-group">
+        <label for="firstName">Имя</label>
+        <input type="text" id="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Фамилия</label>
+        <input type="text" id="lastName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Возраст</label>
+        <input type="number" id="age" min="18" required>
+      </div>
+
+      <div class="form-group">
+        <label for="organization">Организация</label>
+        <input type="text" id="organization" required>
+      </div>
+
+      <div class="form-group">
+        <label for="hasChildren">
+          <input type="checkbox" id="hasChildren">
+          Есть дети
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="employeePosition">Должность</label>
+        <select id="employeePosition" required>
+          <option value="">Выберите должность</option>
+          <option value="mechanic">Слесарь</option>
+          <option value="driver">Водитель</option>
+        </select>
+      </div>
+
+      <!-- Поля слесаря -->
+      <div id="mechanicFields" class="additional-fields hidden">
+        <div class="form-group">
+          <label for="category">Разряд</label>
+          <select id="category">
+            <option value="">Выберите разряд</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="specialization">Специализация</label>
+          <input type="text" id="specialization">
+        </div>
+      </div>
+
+      <!-- Поля водителя -->
+      <div id="driverFields" class="additional-fields hidden">
+        <div class="form-group">
+          <label for="licenseCategory">Категория прав</label>
+          <select id="licenseCategory">
+            <option value="">Выберите категорию</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Стаж вождения (лет)</label>
+          <input type="number" id="experience" min="0">
+        </div>
+      </div>
+
+      <button type="submit">Сохранить</button>
+    </form>
+
+    <h2>Список работников</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Организация</th>
+            <th>Есть дети</th>
+            <th>Должность</th>
+            <th>Разряд</th>
+            <th>Специализация</th>
+            <th>Категория прав</th>
+            <th>Стаж вождения</th>
+            <th>Действие</th>
+          </tr>
+        </thead>
+
+        <tbody id="employeeTableBody"></tbody>
+      </table>
+    </div>
+  </div>
 
 </body>
 
